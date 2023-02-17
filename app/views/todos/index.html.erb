@@ -1,0 +1,157 @@
+<h1>Todo#index</h1>
+<p>Find me in app/views/todo/index.html.erb</p>
+
+<ul id="items">
+  <li>item1</li>
+  <li>item2</li>
+  <li>item3</li>
+</ul>
+
+<h4>Gem 'acts_as_list','Sortable.js'</h4>
+<div>
+  <%= form_with model: @todo,local:true do |f| %>
+    <%#= render 'layouts/errors', obj: book %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control todo_title' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, class: 'form-control todo_body' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-success' %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th>タイトル</th>
+        <th>本文</th>
+      </tr>
+    </thead>
+    <tbody class="js-sortable-todos">
+      <% @todos.each do |to| %>
+        <tr class="item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
+          <td>
+            <span class="handle">◯</span>
+          </td>
+          <td><%= to.title %></td>
+          <td><%= to.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<h4>Gem 'jquery-ui-rails','ranked-model'</h4>
+<div>
+  <%= form_with model: @todo,local:true do |f| %>
+    <%#= render 'layouts/errors', obj: book %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control todo_title' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, class: 'form-control todo_body' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-success' %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <table class="table table-bordered table-sortable">
+    <thead>
+      <tr>
+        <th></th>
+        <th>タイトル</th>
+        <th>本文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @todos.each do |to| %>
+        <tr class="item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
+          <td>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </td>
+          <td><%= to.title %></td>
+          <td><%= to.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+<script>
+  var el = document.getElementById('items');
+  var sortable = Sortable.create(el);
+
+  // 'acts_as_list','Sortable.js'
+  import Sortable from 'sortablejs';
+
+  // $(function() {
+  //     const el = document.getElementById('js-sortable-todos');
+  //     new Sortable(el, {
+  //         handle: "span.handle",
+  //         axis: 'y',
+  //         animation: 300,
+  //         onUpdate: function (evt) {
+  //             return $.ajax({
+  //                 url: `/api/todo/positions/${evt.oldIndex}`,
+  //                 type: 'patch',
+  //                 data: {
+  //                     from: evt.oldIndex,
+  //                     to: evt.newIndex
+  //                 }
+  //             });
+  //         }
+  //     });
+  // });
+
+
+  // 'jquery-ui-rails','ranked-model'
+  // $(function(){
+  //   $('.table-sortable').sortable({
+  //     axis: 'y',
+  //     items: '.item',
+
+  //     // Ajaxで並び順のデータをコントローラーに送信
+  //     update(e, ui) {
+  //       let item = ui.item;
+  //       let item_data = item.data();
+  //       let params = { _method: 'put' };
+  //       params[item_data.model_name] = { row_order_position: item.index() };
+  //       $.ajax({
+  //         type: 'POST',
+  //         url: item_data.update_url,
+  //         dataType: 'json',
+  //         data: params,
+  //       });
+  //     },
+
+  //     // ドラッグ幅をテーブルに合わせる
+  //     start(e, ui) {
+  //       let cells, tableWidth, widthForEachCell;
+  //       tableWidth = $(this).width();
+  //       cells = ui.item.children('td');
+  //       widthForEachCell = tableWidth / cells.length + 'px';
+  //       return cells.css('width', widthForEachCell);
+  //     },
+
+  //     // エフェクトを付与
+  //     stop(e, ui) {
+  //       return ui.item.children('td').effect('highlight');
+  //     },
+  //   });
+  // });
+</script>

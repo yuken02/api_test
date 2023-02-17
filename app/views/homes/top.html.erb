@@ -1,0 +1,79 @@
+<h1>test</h1>
+<% if @trends == nil %>
+  <p>空です</p>
+<% else %>
+  <%= @trends %>
+<% end %>
+
+<div>
+  <table class="table table-bordered table-sortable">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>タイトル</th>
+        <th>本文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="item{"data-item_id":"#{1}"}">
+        <td>1</td>
+        <td>タイトル1</td>
+        <td>ボディ</td>
+      </tr>
+      <tr class="item{"data-item_id":"#{2}"}">
+        <td>2</td>
+        <td>タイトル2</td>
+        <td>ボディ</td>
+      </tr>
+      <tr class="item{"data-item_id":"#{3}"}">
+        <td>3</td>
+        <td>タイトル3</td>
+        <td>ボディ</td>
+      </tr>
+      <tr class="item{"data-item_id":"#{4}"}">
+        <td>4</td>
+        <td>タイトル4</td>
+        <td>ボディ</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<script>
+  $(function(){
+  $('.table-sortable').sortable({
+    axis: 'y',
+    items: '.item',
+
+    // Ajaxで並び順のデータをコントローラーに送信
+    // update(e, ui) {
+    //   let item = ui.item;
+    //   let item_data = item.data();
+    //   let params = { _method: 'put' };
+    //   params[item_data.model_name] = { row_order_position: item.index() };
+    //   $.ajax({
+    //     type: 'POST',
+    //     url: item_data.update_url,
+    //     dataType: 'json',
+    //     data: params,
+    //   });
+    // },
+
+    // ドラッグ幅をテーブルに合わせる
+    start(e, ui) {
+      let cells, tableWidth, widthForEachCell;
+      tableWidth = $(this).width();
+      cells = ui.item.children('td');
+      widthForEachCell = tableWidth / cells.length + 'px';
+      return cells.css('width', widthForEachCell);
+    },
+
+    // エフェクトを付与
+    stop(e, ui) {
+      return ui.item.children('td').effect('highlight');
+    },
+  });
+});
+</script>

@@ -1,0 +1,8 @@
+  <div id='tweet_list'>
+    <% if @tweets.present? %>
+      <h2>検索結果</h2>
+      <%= @tweets %>
+    <% else %>
+      検索結果が空です
+    <% end %>
+  </div>

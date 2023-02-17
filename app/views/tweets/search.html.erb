@@ -1,0 +1,11 @@
+<div class='content'>
+  <div id="search-box">
+    <%#= form_tag('/tweets/search', method: :get) do %>
+      <%#= text_field_tag :tweet, nil,  id: "tweet_search", name: "keyword", placeholder: "キーワードを打ち込んでください", style: "width: 200px;"%><button title="検索" type="submit">検索</button>
+    <%# end %>
+    <%= form_with url: "/tweets/show",method: :get do |form| %>
+      <%= form.text_field :keyword %>
+      <button title="検索" type="submit">検索</button>
+    <% end %>
+  </div>
+</div>
