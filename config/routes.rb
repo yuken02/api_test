@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   resources :tweets, only: [:show]
   resources :drag_and_drop, only: [:index]
   # resources :todos, only: [:index] //↓↓
-  resources :todos, only: [:index, :create] do
-    put :sort
-  end
+  # resources :todos, only: [:index, :create] do
+  #   put :sort
+  # end
+  resources :todos, only: [:index, :create]
 
   namespace :api do
     namespace :todo do

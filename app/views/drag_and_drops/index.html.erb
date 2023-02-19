@@ -32,10 +32,10 @@
 
 
 <script>
-  $(function(){
-  $('.table-sortable').sortable({
-    axis: 'y',
-    items: '.item',
+  // $(function(){
+  // $('.table-sortable').sortable({
+  //   axis: 'y',
+  //   items: '.item',
 
     // Ajaxで並び順のデータをコントローラーに送信
     // update(e, ui) {
@@ -52,18 +52,18 @@
     // },
 
     // ドラッグ幅をテーブルに合わせる
-    start(e, ui) {
-      let cells, tableWidth, widthForEachCell;
-      tableWidth = $(this).width();
-      cells = ui.item.children('td');
-      widthForEachCell = tableWidth / cells.length + 'px';
-      return cells.css('width', widthForEachCell);
-    },
+    // start(e, ui) {
+    //   let cells, tableWidth, widthForEachCell;
+    //   tableWidth = $(this).width();
+    //   cells = ui.item.children('td');
+    //   widthForEachCell = tableWidth / cells.length + 'px';
+    //   return cells.css('width', widthForEachCell);
+    // },
 
     // エフェクトを付与
-    stop(e, ui) {
-      return ui.item.children('td').effect('highlight');
-    },
-  });
-});
+//     stop(e, ui) {
+//       return ui.item.children('td').effect('highlight');
+//     },
+//   });
+// });
 </script>

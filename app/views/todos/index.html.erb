@@ -1,122 +1,138 @@
-<h1>Todo#index</h1>
-<p>Find me in app/views/todo/index.html.erb</p>
-
-<ul id="items">
-  <li>item1</li>
-  <li>item2</li>
-  <li>item3</li>
-</ul>
-
-<h4>Gem 'acts_as_list','Sortable.js'</h4>
-<div>
-  <%= form_with model: @todo,local:true do |f| %>
-    <%#= render 'layouts/errors', obj: book %>
-    <div class="form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control todo_title' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :body %>
-      <%= f.text_area :body, class: 'form-control todo_body' %>
-    </div>
-    <div class="form-group">
-      <%= f.submit class: 'btn btn-success' %>
-    </div>
-  <% end %>
-</div>
-
-<div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th></th>
-        <th>タイトル</th>
-        <th>本文</th>
-      </tr>
-    </thead>
-    <tbody class="js-sortable-todos">
-      <% @todos.each do |to| %>
-        <tr class="item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
-          <td>
-            <span class="handle">◯</span>
-          </td>
-          <td><%= to.title %></td>
-          <td><%= to.body %></td>
-        </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <%= form_with model: @todo,local:true do |f| %>
+        <%#= render 'layouts/errors', obj: book %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control todo_title' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :body %>
+          <%= f.text_area :body, class: 'form-control todo_body' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit class: 'btn btn-success btn-sm' %>
+        </div>
       <% end %>
-    </tbody>
-  </table>
-</div>
-
-
-<h4>Gem 'jquery-ui-rails','ranked-model'</h4>
-<div>
-  <%= form_with model: @todo,local:true do |f| %>
-    <%#= render 'layouts/errors', obj: book %>
-    <div class="form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control todo_title' %>
     </div>
-    <div class="form-group">
-      <%= f.label :body %>
-      <%= f.text_area :body, class: 'form-control todo_body' %>
-    </div>
-    <div class="form-group">
-      <%= f.submit class: 'btn btn-success' %>
-    </div>
-  <% end %>
-</div>
+  </div>
 
-<div>
-  <table class="table table-bordered table-sortable">
-    <thead>
-      <tr>
-        <th></th>
-        <th>タイトル</th>
-        <th>本文</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @todos.each do |to| %>
-        <tr class="item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
-          <td>
-            <span><i class="fas fa-ellipsis-v"></i></span>
-          </td>
-          <td><%= to.title %></td>
-          <td><%= to.body %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row mt-3">
+    <div class="col-8">
+      <h4>'Sortable.js'練習</h4>
+      <!--<div class="kanban" data-id="<%#= @kanban.id %>">-->
+      <!--  <%# @kanban.kanban_columns.each do |column| %>-->
+      <!--    <ul class="kanban-col" data-col-id=<%#= column.id %> >-->
+      <!--      <li class="kanban-col-name"><%#= column.name %></li>-->
+      <!--      <%# column.cards.sort_by{ |card| card.position}.each do |item| %>-->
+      <!--        <li class="kanban-col-item" data-item-id=<%#= item.id %> >-->
+      <!--          <%#= item.content %>-->
+      <!--        </li>-->
+      <!--      <%# end %>-->
+      <!--    </ul>-->
+      <!--  <%# end %>-->
+      <!--</div>-->
+      <div class="todo" data-id="1">
+        <ul class="todo_col" data-col-id="1">
+          <li class="todo-col-name">name1</li>
+          <li class="todo-col-item" data-time-id="1">item1</li>
+          <li class="todo-col-item" data-time-id="2">item2</li>
+          <li class="todo-col-item" data-time-id="3">item3</li>
+        </ul>
+        <ul class="todo_col" data-col-id="2">
+          <li class="todo-col-name">name2</li>
+          <li class="todo-col-item" data-time-id="2">item2</li>
+        </ul>
+      </div>
+    </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-6">
+        <h4 class="">Gem 'acts_as_list','Sortable.js'</h4>
+        <div>
+          <table class="table table-bordered todo">
+            <thead>
+              <tr>
+                <th></th>
+                <th>タイトル</th>
+                <th>本文</th>
+              </tr>
+            </thead>
+            <tbody class="js-sortable-todos todo_col">
+              <% @todos.each do |to| %>
+                <tr class="item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
+                  <td>
+                    <span class="handle"><i class="fas fa-ellipsis-v"></i></span>
+                  </td>
+                  <td class="handle"><%= to.title %></td>
+                  <td><%= to.body %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-6">
+        <h4>Gem 'jquery-ui-rails','ranked-model'</h4>
+        <div>
+          <table class="table table-bordered table-sortable">
+            <thead>
+              <tr>
+                <th></th>
+                <th>タイトル</th>
+                <th>本文</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <% @todos.each do |to| %>
+                <tr class=" item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
+                  <td class="">
+                    <span class=""><i class="fas fa-ellipsis-v"></i></span>
+                  </td>
+                  <td><%= to.title %></td>
+                  <td><%= to.body %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
 </div>
 
 
 
 <script>
-  var el = document.getElementById('items');
-  var sortable = Sortable.create(el);
+  // var el = document.getElementById('items');
+  // var sortable = Sortable.create(el);
 
   // 'acts_as_list','Sortable.js'
-  import Sortable from 'sortablejs';
+  // import Sortable from 'sortablejs';
 
-  // $(function() {
-  //     const el = document.getElementById('js-sortable-todos');
-  //     new Sortable(el, {
-  //         handle: "span.handle",
-  //         axis: 'y',
-  //         animation: 300,
-  //         onUpdate: function (evt) {
-  //             return $.ajax({
-  //                 url: `/api/todo/positions/${evt.oldIndex}`,
-  //                 type: 'patch',
-  //                 data: {
-  //                     from: evt.oldIndex,
-  //                     to: evt.newIndex
-  //                 }
-  //             });
-  //         }
-  //     });
-  // });
+  $(function() {
+      const el = document.getElementById('js-sortable-todos');
+      new Sortable(el, {
+          handle: "span.handle",
+          axis: 'y',
+          animation: 300,
+          onUpdate: function (evt) {
+              return $.ajax({
+                  url: `/api/todo/positions/${evt.oldIndex}`,
+                  type: 'patch',
+                  data: {
+                      from: evt.oldIndex,
+                      to: evt.newIndex
+                  }
+              });
+          }
+      });
+  });
 
 
   // 'jquery-ui-rails','ranked-model'
