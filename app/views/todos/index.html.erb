@@ -34,16 +34,20 @@
       <!--  <%# end %>-->
       <!--</div>-->
       <div class="todo" data-id="1">
-        <ul class="todo_col" data-col-id="1">
+        <ul class="todo_col card" data-col-id="1">
           <li class="todo-col-name">name1</li>
-          <li class="todo-col-item" data-time-id="1">item1</li>
-          <li class="todo-col-item" data-time-id="2">item2</li>
-          <li class="todo-col-item" data-time-id="3">item3</li>
+          <li class="handle todo-col-item" data-time-id="1">item1</li>
+          <li class="handle todo-col-item" data-time-id="2">item2</li>
+          <li class="handle todo-col-item" data-time-id="3">item3</li>
         </ul>
-        <ul class="todo_col" data-col-id="2">
-          <li class="todo-col-name">name2</li>
-          <li class="todo-col-item" data-time-id="2">item2</li>
-        </ul>
+
+        <div>
+            <li class="todo-col-name">name2</li>
+          <ul class="todo_col card" data-col-id="2">
+            <li class="handle todo-col-item" data-time-id="4">item4</li>
+            <li class="handle todo-col-item" data-time-id="5">item5</li>
+          </ul>
+        </div>
       </div>
     </div>
     </div>
@@ -51,23 +55,30 @@
     <div class="row mt-3">
       <div class="col-6">
         <h4 class="">Gem 'acts_as_list','Sortable.js'</h4>
+        <button class="edit_btn">切り替え</button>
         <div>
-          <table class="table table-bordered todo">
+          <table class="table table-bordered todo js-sortable-todos">
             <thead>
               <tr>
+                <th class=""></th>
+                <th class="">タイトル</th>
+                <th class="">本文</th>
+                <!--<th class="edit_n">本文</th>-->
                 <th></th>
-                <th>タイトル</th>
-                <th>本文</th>
               </tr>
             </thead>
-            <tbody class="js-sortable-todos todo_col">
+            <tbody class="js-sortable-todo todo_col edit_box">
               <% @todos.each do |to| %>
                 <tr class="item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
-                  <td>
+                  <td class="edit_d active">
                     <span class="handle"><i class="fas fa-ellipsis-v"></i></span>
                   </td>
-                  <td class="handle"><%= to.title %></td>
-                  <td><%= to.body %></td>
+                  <td class="edit_n"></td>
+                  <td class="edit_d active handle"><%= to.title %></td>
+                  <td class="edit_n"><%= to.title %>!!</td>
+                  <td class="edit_d"><%= to.body %></td>
+                  <td class="edit_n"><%= to.body %>!!</td>
+                  <td class="edit_n"><button>削除</button></td></td>
                 </tr>
               <% end %>
             </tbody>
@@ -89,15 +100,15 @@
               </tr>
             </thead>
             <tbody class="">
-              <% @todos.each do |to| %>
+              <%# @todos.each do |to| %>
                 <tr class=" item{"data-model_name": "to.class.name.underscore", "update_url": "todo_sort_path(to)" }">
                   <td class="">
                     <span class=""><i class="fas fa-ellipsis-v"></i></span>
                   </td>
-                  <td><%= to.title %></td>
-                  <td><%= to.body %></td>
+                  <td><%#= to.title %></td>
+                  <td><%#= to.body %></td>
                 </tr>
-              <% end %>
+              <%# end %>
             </tbody>
           </table>
         </div>
@@ -109,30 +120,55 @@
 
 
 <script>
+  $(function() {
+    // var index = $('.tab_box .tab_btn').index(this);
+    // $('.edit_btn').on('click',function(){
+    //   $('.edit_d').removeClass('active');
+    //   $('.edit_n').addClass('active');
+    // });
+    // $('.edit_btn').on('click',function(){
+    //   $('.edit_n').removeClass('active');
+    //   $('.edit_d').addClass('active');
+    // });
+    $('.edit_btn').on('click',function(){
+      if($('.edit_d').hasClass('active')){
+           //要素の表示を切り替える
+          $('.edit_d').removeClass('active');
+          $('.edit_n').addClass('active');
+      }else{
+           //要素の表示を切り替える
+          $('.edit_n').removeClass('active');
+          $('.edit_d').addClass('active');
+      }
+    });
+  });
+
+
   // var el = document.getElementById('items');
   // var sortable = Sortable.create(el);
 
   // 'acts_as_list','Sortable.js'
   // import Sortable from 'sortablejs';
 
-  $(function() {
-      const el = document.getElementById('js-sortable-todos');
-      new Sortable(el, {
-          handle: "span.handle",
-          axis: 'y',
-          animation: 300,
-          onUpdate: function (evt) {
-              return $.ajax({
-                  url: `/api/todo/positions/${evt.oldIndex}`,
-                  type: 'patch',
-                  data: {
-                      from: evt.oldIndex,
-                      to: evt.newIndex
-                  }
-              });
-          }
-      });
-  });
+  // $(function() {
+  //     const el = document.getElementById('js-sortable-todos');
+  //     new Sortable(el, {
+  //         group: "todos",
+  //         handle: ".handle",
+  //         axis: 'y',
+  //         animation: 300,
+  //         onUpdate: function (evt) {
+  //             return $.ajax({
+  //                 url: `/api/todo/positions/${evt.oldIndex}`,
+  //                 type: 'patch',
+  //                 data: {
+  //                     from: evt.oldIndex,
+  //                     to: evt.newIndex
+  //                 }
+  //             });
+  //         }
+  //     });
+  // });
 
 
   // 'jquery-ui-rails','ranked-model'
@@ -171,3 +207,52 @@
   //   });
   // });
 </script>
+
+
+<!--<%# words.each_with_index do |word,i| %>-->
+<!--  <tr>-->
+<!--    <td class="tr edit_n" style="width:1px;">-->
+<!--      <span class="">-->
+<!--        <i class="fas fa-ellipsis-v"></i>-->
+<!--      </span>-->
+<!--    </td>-->
+<!--    <td class="tr edit_n">-->
+<!--      <span class=""><%#= word.word %></span>-->
+<!--    </td>-->
+<!--    <td class="tr edit_d">-->
+<!--      <span class="">-->
+<!--        <%#= check_box_tag "keywords[#{i}]", word.word %>-->
+<!--        <%#= label_tag "keywords[#{i}]", word.word, class: "" %>-->
+<!--      </span>-->
+<!--    </td>-->
+<!--    <td class="tr edit_n" width="20px">-->
+<!--      <%#= link_to '削除', word, method: :delete, data: { confirm: "\"#{word.word}\" を削除しますか？"}, class: "btn btn-sm btn-danger p-1 ml-auto", remote: true, style: "display:none;" %>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--<%# end %>-->
+
+
+<!--.tr {-->
+<!--  display: table-cell;-->
+<!--}-->
+<!--.edit_d {-->
+<!--  display: none;-->
+<!--}-->
+
+<!--.edit_d.active {-->
+<!--  display: table-cell;-->
+<!--}-->
+
+<!--.edit_n {-->
+<!--  display: none;-->
+<!--}-->
+
+<!--.edit_n.active {-->
+<!--  display: table-cell;-->
+<!--}-->
+
+<!--.del {-->
+<!--	text-size: 80%;-->
+<!--// 	display: none;-->
+<!--	width: 40px;-->
+<!--}-->

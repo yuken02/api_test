@@ -4,7 +4,18 @@ const initTodoSortable = (ulElements) => {
     new Sortable(ul, {
       handle: ".handle",
       group: 'todo', // set both lists to same group
-      animation: 300
+      animation: 300,
+      axis: 'y',
+      onUpdate: function (evt) {
+              return $.ajax({
+                  url: `/api/todo/positions/${evt.oldIndex}`,
+                  type: 'patch',
+                  data: {
+                      from: evt.oldIndex,
+                      to: evt.newIndex
+                  }
+              });
+          }
     });
   });
 };

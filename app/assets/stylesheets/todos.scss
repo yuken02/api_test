@@ -5,3 +5,19 @@
 .handle:hover {
   cursor: row-resize;
 }
+
+.edit_d {
+  display: none;
+}
+
+.edit_d.active {
+  display: table-cell;
+}
+
+.edit_n {
+  display: none;
+}
+
+.edit_n.active {
+  display: table-cell;
+}

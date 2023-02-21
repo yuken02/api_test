@@ -3,8 +3,8 @@ class TodosController < ApplicationController
     @todo = Todo.new
     # @todos = Todo.all //↓↓
     # @todos = Todo.rank(:row_order).all
-    # @todos = Todo.sorted
-    @todos = Todo.all
+    @todos = Todo.sorted
+    # @todos = Todo.all
   end
 
   def create
