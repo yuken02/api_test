@@ -1,0 +1,113 @@
+<h1>Youtu#index</h1>
+<p>Find me in app/views/youtu/index.html.erb</p>
+<!--<div>-->
+<!--  <iframe id="ytplayer" type="text/html" width="720" height="405"-->
+<!--  src="https://www.youtube.com/embed/Nz5b7Mxm3bY?autoplay=1&end=3760&start=3703"-->
+<!--  frameborder="0" allowfullscreen>-->
+<!--</div>-->
+<!--<div>-->
+<!--  <iframe id="ytplayer" type="text/html" width="720" height="405"-->
+<!--  src="https://www.youtube.com/embed/XcfrIDaRioc"-->
+<!--  >-->
+<!--</div>-->
+
+<div id="sample"></div>
+
+
+
+<!--<script>-->
+<!--var tag = document.createElement('script');-->
+<!--tag.src = "https://www.youtube.com/iframe_api";-->
+<!--var firstScriptTag = document.getElementsByTagName('script')[0];-->
+<!--firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);-->
+
+<!--let ytPlayer;-->
+<!--function onYouTubeIframeAPIReady() {-->
+<!--    ytPlayer = new YT.Player('sample', {-->
+<!--        videoId: 'E7ZoxfoRxWw',-->
+<!--        playerVars: {-->
+<!--            playsinline: 1,-->
+<!--            start: 5,-->
+<!--            end: 10-->
+<!--        },-->
+<!--        events: {-->
+<!--            'onReady': onPlayerReady-->
+<!--        }-->
+<!--    });-->
+<!--}-->
+
+<!--// YouTubeの準備完了後、ミュートにして再生開始-->
+<!--function onPlayerReady(e) {-->
+<!--    ytPlayer.mute();-->
+<!--    ytPlayer.playVideo();-->
+<!--}-->
+<!--</script>-->
+
+<!--<script>-->
+<!--var tag = document.createElement('script');-->
+<!--tag.src = "https://www.youtube.com/iframe_api";-->
+<!--var firstScriptTag = document.getElementsByTagName('script')[0];-->
+<!--firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);-->
+
+<!--let ytPlayer;-->
+<!--function onYouTubeIframeAPIReady() {-->
+<!--    ytPlayer = new YT.Player('sample', {-->
+<!--        videoId: 'bVQ83PuM8qo',-->
+<!--        playerVars: {-->
+<!--            playsinline: 1,-->
+<!--            start: 646,-->
+<!--            end: 827-->
+<!--        },-->
+<!--        events: {-->
+<!--            'onReady': onPlayerReady-->
+<!--        },-->
+<!--    });-->
+<!--}-->
+
+<!--// YouTubeの準備完了後、ミュートにして再生開始-->
+<!--function onPlayerReady(e) {-->
+<!--    ytPlayer.mute();-->
+<!--    ytPlayer.playVideo();-->
+<!--}-->
+<!--</script>-->
+
+<script>
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+let ytPlayer;
+function onYouTubeIframeAPIReady() {
+   ytPlayer = new YT.Player('sample', {
+       videoId: 'bVQ83PuM8qo',
+       playerVars: {
+           playsinline: 1,
+           start: 646,
+           end: 827
+       },
+       events: {
+           'onReady': onPlayerReady,
+       },
+   });
+}
+
+function onPlayerReady(event) {
+ event.target.setVolume(10);
+ event.target.playVideo();
+}
+</script>
+
+<!--events: {-->
+<!--      'onReady': onPlayerReady,-->
+<!--      'onPlaybackQualityChange': onPlayerPlaybackQualityChange,-->
+<!--      'onStateChange': onPlayerStateChange,-->
+<!--      'onError': onPlayerError-->
+<!--    }-->
+<!--  });-->
+<!--}-->
+
+<!--function onPlayerReady(event) {-->
+<!--  event.target.setVolume(100);-->
+<!--  event.target.playVideo();-->
+<!--}-->

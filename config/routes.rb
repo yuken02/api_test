@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   #   put :sort
   # end
   resources :todos, only: [:index, :create]
+  resources :youtus, only: [:index]
 
   namespace :api do
     namespace :todo do
