@@ -11,10 +11,28 @@
 <!--  >-->
 <!--</div>-->
 
-<div id="sample"></div>
+<!--<div id="sample"></div>-->
+
+<!--<div id="embed_movie"></div>-->
+<!--<ul class="list-movie-02">-->
+<!--  <li><a href="https://www.youtube.com/embed/zoynMroawZw">動画1</a></li>-->
+<!--  <li><a href="http://youtu.be/_GfEtpibO0k">動画2</a></li>-->
+<!--  <li><a href="http://youtu.be/dXFRgQmuni0">動画3</a></li>-->
+<!--</ul>-->
+
+<div class="movie_center">
+	<div id="movie-play"></div>
+</div>
+<ul id="movie-menu"></ul>
+
+<!--<div class="movie-content-wrap">-->
+<!--	<div id="movie-content"></div>-->
+<!--</div>-->
+<!--<ul id="movie-thumb"></ul>-->
 
 
 
+<!----- sample ----->
 <!--<script>-->
 <!--var tag = document.createElement('script');-->
 <!--tag.src = "https://www.youtube.com/iframe_api";-->
@@ -42,6 +60,7 @@
 <!--    ytPlayer.playVideo();-->
 <!--}-->
 <!--</script>-->
+
 
 <!--<script>-->
 <!--var tag = document.createElement('script');-->
@@ -71,32 +90,34 @@
 <!--}-->
 <!--</script>-->
 
-<script>
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-let ytPlayer;
-function onYouTubeIframeAPIReady() {
-   ytPlayer = new YT.Player('sample', {
-       videoId: 'bVQ83PuM8qo',
-       playerVars: {
-           playsinline: 1,
-           start: 646,
-           end: 827
-       },
-       events: {
-           'onReady': onPlayerReady,
-       },
-   });
-}
+<!--<script>-->
+<!--var tag = document.createElement('script');-->
+<!--tag.src = "https://www.youtube.com/iframe_api";-->
+<!--var firstScriptTag = document.getElementsByTagName('script')[0];-->
+<!--firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);-->
 
-function onPlayerReady(event) {
- event.target.setVolume(10);
- event.target.playVideo();
-}
-</script>
+<!--let ytPlayer;-->
+<!--function onYouTubeIframeAPIReady() {-->
+<!--   ytPlayer = new YT.Player('sample', {-->
+<!--       videoId: 'bVQ83PuM8qo',-->
+<!--       playerVars: {-->
+<!--           playsinline: 1,-->
+<!--           start: 646,-->
+<!--           end: 827-->
+<!--       },-->
+<!--       events: {-->
+<!--           'onReady': onPlayerReady,-->
+<!--       },-->
+<!--   });-->
+<!--}-->
+
+<!--function onPlayerReady(event) {-->
+<!-- event.target.setVolume(10);-->
+<!-- event.target.playVideo();-->
+<!--}-->
+<!--</script>-->
+
 
 <!--events: {-->
 <!--      'onReady': onPlayerReady,-->
@@ -111,3 +132,172 @@ function onPlayerReady(event) {
 <!--  event.target.setVolume(100);-->
 <!--  event.target.playVideo();-->
 <!--}-->
+
+
+
+<!----- embed_movie ----->
+<!--<script>-->
+<!--var ytPlayer2;-->
+
+<!--// Player APIの非同期ロード-->
+<!--(function (document) {-->
+<!--    var api = document.createElement("script"),-->
+<!--        script;-->
+
+<!--    api.src = "//www.youtube.com/player_api";-->
+<!--    script = document.getElementsByTagName("script")[0];-->
+<!--    script.parentNode.insertBefore(api, script);-->
+<!--}(document));-->
+
+<!--// Player APIスタンバイ完了時の処理-->
+<!--function onYouTubePlayerAPIReady() {-->
+<!--    ytPlayer2 = new YT.Player("embed_movie", {-->
+<!--        width: 460,-->
+<!--        height: 350,-->
+<!--        videoId: "zoynMroawZw",-->
+<!--        playerVars: {-->
+<!--            "rel": 0,-->
+<!--            "autoplay": 0,-->
+<!--            start: 7580,-->
+<!--            "wmode": "opaque"-->
+<!--        }-->
+<!--    });-->
+<!--}-->
+
+<!--// 動画リストクリック時の処理-->
+<!--$(function () {-->
+<!--    $(".list-movie-02").on("click", "a", function (e) {-->
+<!--        e.preventDefault();-->
+<!--        var videoId = $(this).attr("href").replace(/https?:\/\/[0-9a-zA-Z\.]+\//, "");-->
+<!--        ytPlayer2.loadVideoById(videoId);-->
+<!--    });-->
+<!--});-->
+<!--</script>-->
+
+
+
+<!----- movie_center ----->
+<script>
+//IFrame Player APIを呼び出す
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  //プレーヤーの準備
+	let thumbInsert = '';
+	let ytPlayer;
+	let ytData = [
+		{ id: 'E7ZoxfoRxWw', start: '' }, //youtubeのID },
+		{ id: 'bVQ83PuM8qo', start: '646', end: '827' },
+		{ id: 'LbaxU0-3wB8', start: '611', end: '841' },
+		{ id: 'bVQ83PuM8qo', start: '' }
+	];
+		// let ytTime = [
+		// 	{ start: ''},
+		// 	{ start: '646', end: '827'},
+		// 	{ start: '611', end: '841'},
+		// 	{ start: ''}
+		// 	];
+	//サムネイル画像の埋め込み準備
+	for(let i = 0; i < ytData.length; i++) {
+		thumbInsert += '<li>';
+		thumbInsert += '<img src="https://img.youtube.com/vi/' + ytData[i]['id'] + '/default.jpg" alt="">';
+		thumbInsert += '</li>';
+	}
+  // 動画プレーヤーの読み込み
+	window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('movie-play', {
+      height: '360',
+      width: '640',
+      videoId: ytData[0]['id'],
+			playerVars:{
+				rel: 0, //関連動画なし
+				modestbranding: 1, //YouTube ロゴなし
+					// playerVars: {start: ytTime[0]['start']}
+					playerVars: {
+						start: ytData[0]['start'],
+						start: ytData[0]['end'],
+					}
+			}
+    });
+  }
+	//動画の再生
+	function play(ytId, seekTime) {
+		ytPlayer.loadVideoById(ytId, seekTime);
+	}
+
+//サムネイルクリック
+$(function() {
+	$('#movie-menu').append(thumbInsert);
+  /* 指定した動画を再生 */
+	$('#movie-menu li img').on('click', function() {
+		ytId = $(this).attr('src').replace('https://img.youtube.com/vi/', '');
+		ytId = ytId.replace('/default.jpg', '');
+		play(ytId, 0);
+		return false;
+	});
+});
+</script>
+
+
+
+<!--<script>-->
+<!--//IFrame Player API の読み込み-->
+<!--var tag = document.createElement('script');-->
+<!--tag.src = "https://www.youtube.com/iframe_api";-->
+<!--var firstScriptTag = document.getElementsByTagName('script')[0];-->
+<!--firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);-->
+
+<!--var thumbInsert = '';-->
+<!--var ytPlayer;-->
+<!--var ytData = [-->
+<!--	{-->
+<!--		id: 'E7ZoxfoRxWw'-->
+<!--	},-->
+<!--	{-->
+<!--		id: 'ZRCdORJiUgU' //youtubeのID-->
+<!--	},-->
+<!--	{-->
+<!--		id: '6aFdEhEZQjE'-->
+<!--	}-->
+<!--];-->
+
+<!--//サムネイル画像の埋め込み準備-->
+<!--for(var i = 0; i < ytData.length; i++) {-->
+<!--	thumbInsert += '<li>';-->
+<!--	thumbInsert += '<img src="http://img.youtube.com/vi/' + ytData[i]['id'] + '/mqdefault.jpg" alt="">';-->
+<!--	thumbInsert += '</li>';-->
+<!--}-->
+
+<!--//YouTubeの埋め込み-->
+<!--window.onYouTubeIframeAPIReady = function() {-->
+<!--	ytPlayer = new YT.Player('movie-content', {-->
+<!--		width: 800,-->
+<!--		height: 450,-->
+<!--		videoId: ytData[0]['id'],-->
+<!--		playerVars: {-->
+<!--			rel: 0,-->
+<!--			modestbranding: 1-->
+<!--		}-->
+<!--	});-->
+<!--}-->
+
+<!--//動画の再生-->
+<!--function play(ytId, seekTime) {-->
+<!--	ytPlayer.loadVideoById(ytId, seekTime);-->
+<!--}-->
+
+<!--$(function() {-->
+<!--	//サムネイル画像の埋め込み-->
+<!--	$('#movie-thumb').append(thumbInsert);-->
+
+<!--	//サムネイル画像クリック時の動作-->
+<!--	$('#movie-thumb li img').on('click', function() {-->
+<!--		ytId = $(this).attr('src').replace('http://img.youtube.com/vi/', '');-->
+<!--		ytId = ytId.replace('/mqdefault.jpg', '');-->
+<!--		play(ytId, 0);-->
+<!--		return false;-->
+<!--	});-->
+<!--});-->
+<!--</script>-->
