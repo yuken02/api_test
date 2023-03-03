@@ -1,5 +1,56 @@
-<h1>Youtu#index</h1>
-<p>Find me in app/views/youtu/index.html.erb</p>
+<div class="container">
+	<div class="row">
+		<h1>Youtu#index</h1>
+		<p>Find me in app/views/youtu/index.html.erb</p>
+	</div>
+
+	<div class="row">
+	</div>
+
+	<div class="row">
+		<div class="col-md-7">
+			<iframe id="ytV" width="560" height="315" src="https://www.youtube.com/embed/CQnKxeE2IbQ?start=2388&end=2694"
+				title="YouTube video player" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+			</iframe>
+			<div>
+				<a href="javascript:void(0);" onclick="LinkClick(0);">LAST STARDUST</a><br/>
+			  <a href="javascript:void(0);" onclick="LinkClick(1);">点描の唄</a><br />
+			</div>
+
+			<div class="movie_center mt-md-2" style="max-width: 600px">
+				<div id="movie-play"></div>
+			</div>
+		</div>
+
+		<div class="col-md-2">
+			<div class="overflow-auto" style="height:80vh;">
+				<ul id="movie-menu" class="list-group" style=""></ul>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="overflow-auto" style="height:50vh;">
+				<div id="movie-menu-2" class="list-group" style="">
+					<button class="list-group-item list-group-item-action px-auto">SOS</button>
+					<button class="list-group-item list-group-item-action px-auto">残響讃歌</button>
+					<button class="list-group-item list-group-item-action px-auto">シャルル</button>
+					<button class="list-group-item list-group-item-action px-auto">LAST STARDUST</button>
+					<button class="list-group-item list-group-item-action px-auto">you</button>
+					<button class="list-group-item list-group-item-action px-auto">点描の唄</button>
+					<button class="list-group-item list-group-item-action px-auto">Virtual to LIVE</button>
+					<button class="list-group-item list-group-item-action px-auto">only my railgun</button>
+					<button class="list-group-item list-group-item-action px-auto">神っぽいな</button>
+					<button class="list-group-item list-group-item-action px-auto">神っぽいな</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		<!--<div class="">-->
+		<!--	<div class="" style="">-->
+		<!--		<ul id="movie-menu"></ul>-->
+		<!--	</div>-->
+		<!--</div>-->
 <!--<div>-->
 <!--  <iframe id="ytplayer" type="text/html" width="720" height="405"-->
 <!--  src="https://www.youtube.com/embed/Nz5b7Mxm3bY?autoplay=1&end=3760&start=3703"-->
@@ -20,20 +71,8 @@
 <!--  <li><a href="http://youtu.be/dXFRgQmuni0">動画3</a></li>2692-->
 <!--</ul>-->
 
-<iframe id="ytV" width="560" height="315" src="https://www.youtube.com/embed/CQnKxeE2IbQ?start=2388&end=2694"
-	title="YouTube video player" frameborder="0"
-	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-</iframe>
-<div>
-	<a href="javascript:void(0);" onclick="LinkClick(0);">LAST STARDUST</a><br/>
-  <a href="javascript:void(0);" onclick="LinkClick(1);">点描の唄</a><br />
-</div>
 
 
-<div class="movie_center">
-	<div id="movie-play"></div>
-</div>
-<ul id="movie-menu"></ul>
 
 <script>
 	function LinkClick(param) {
@@ -222,12 +261,16 @@
 	let thumbInsert = '';
 	let ytPlayer;
 	let ytData = [
-		{ id: 'E7ZoxfoRxWw', start: '' }, //youtubeのID },
+		{ id: 'E7ZoxfoRxWw', start: '' }, //{ youtubeのID, 開始時間(秒), 終了時間(秒) },
 		{ id: 'bVQ83PuM8qo', start: '646', end: '827' },
 		{ id: 'LbaxU0-3wB8', start: '611', end: '841' },
 		{ id: 'CQnKxeE2IbQ', start: '1069', end: '1385' },
 		{ id: 'CQnKxeE2IbQ', start: '2146', end: '2380' },
-		{ id: 'CQnKxeE2IbQ', start: '2388', end: '2694' }
+		{ id: 'CQnKxeE2IbQ', start: '2388', end: '2694' },
+		{ id: 'B_FSf9q8Teo', start: '', end: '' },
+		{ id: 'eXsrobcgs9E', start: '455', end: '706' },
+		{ id: 'n6cAE2ue84w', start: '915', end: '1119' },
+		{ id: 'Dg6dG3U6n-c', start: '', end: '' },
 	];
 		// let ytTime = [
 		// 	{ start: ''},
@@ -237,19 +280,20 @@
 		// 	];
 	//サムネイル画像の埋め込み準備
 	for(let i = 0; i < ytData.length; i++) {
-		thumbInsert += '<li>';
-		thumbInsert += '<img src="https://img.youtube.com/vi/' + ytData[i]['id'] + '/default.jpg" alt="">';
+		thumbInsert += '<li class="list-group-item p-1 mx-1">';
+		thumbInsert += '<img src="https://img.youtube.com/vi/' + ytData[i]['id'] + '/default.jpg" alt="" class="img-fluid" style="max-width: 100%; , height: auto;">';
 		thumbInsert += '</li>';
 	}
   // 動画プレーヤーの読み込み
 	window.onYouTubeIframeAPIReady = function() {
     ytPlayer = new YT.Player('movie-play', {
-      height: '360',
       width: '640',
+      height: '360',
       videoId: ytData[0]['id'],
 			playerVars:{
 				rel: 0, //関連動画なし
 				modestbranding: 1, //YouTube ロゴなし
+				disablekb: 0,
 					// playerVars: {start: ytTime[0]['start']}
 				playerVars: {
 					start: ytData[0]['start'],
@@ -259,14 +303,41 @@
     });
   }
 	//動画の再生
-	function play(ytId, seekTime) {
-		ytPlayer.loadVideoById(ytId, seekTime);
+	// function play(ytId, seekTime) {
+	// 	ytPlayer.loadVideoById(ytId, seekTime);
+	// }
+	function play(ytNum) {
+		ytPlayer.loadVideoById({
+				'videoId': ytData[ytNum]['id'],
+        'startSeconds': ytData[ytNum]['start'],
+        'endSeconds': ytData[ytNum]['end'],
+        'suggestedQuality': 'medium',
+				'rel': 0, //関連動画なし
+				'modestbranding': 1, //YouTube ロゴなし
+				// 'enablejsapi': 1,
+				// 'suggestedQuality': 'large',
+				// 'disablekb': 0 //キーボード操作有効
+		});
 	}
 	// function play(ytId) {
 	// 	ytPlayer.loadVideoById(ytId);
 	// }
 
 //サムネイルクリック
+$(function() {
+	$('#movie-menu').append(thumbInsert);
+  /* 指定した動画を再生 */
+	$('#movie-menu li img, #movie-menu-2 button').on('click', function() {
+		ytNum = $('#movie-menu li img, #movie-menu-2 button').index(this)
+		if (ytNum >= ytData.length){
+			ytNum = ytNum - ytData.length;
+		}
+		console.log(ytNum);
+		console.log(ytData[ytNum]['id']);
+		play(ytNum);
+		return false;
+	});
+});
 // $(function() {
 // 	$('#movie-menu').append(thumbInsert);
 //   /* 指定した動画を再生 */
@@ -277,21 +348,6 @@
 // 		return false;
 // 	});
 // });
-$(function() {
-	$('#movie-menu').append(thumbInsert);
-  /* 指定した動画を再生 */
-	$('#movie-menu li img').on('click', function() {
-		// ytId = $(this).attr('src').replace('https://img.youtube.com/vi/', '');
-		// ytId = ytId.replace('/default.jpg', '');
-		// play(ytId, 0);
-		ytNum = $('#movie-menu li img').index(this)
-		console.log(ytNum);
-		console.log(ytData[ytNum]['id']);
-		play(ytData[ytNum]['id'], ytData[ytNum]['start']);
-		// player.clearVideo()
-		return false;
-	});
-});
 </script>
 
 
