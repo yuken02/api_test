@@ -17,13 +17,55 @@
 <!--<ul class="list-movie-02">-->
 <!--  <li><a href="https://www.youtube.com/embed/zoynMroawZw">動画1</a></li>-->
 <!--  <li><a href="http://youtu.be/_GfEtpibO0k">動画2</a></li>-->
-<!--  <li><a href="http://youtu.be/dXFRgQmuni0">動画3</a></li>-->
+<!--  <li><a href="http://youtu.be/dXFRgQmuni0">動画3</a></li>2692-->
 <!--</ul>-->
+
+<iframe id="ytV" width="560" height="315" src="https://www.youtube.com/embed/CQnKxeE2IbQ?start=2388&end=2694"
+	title="YouTube video player" frameborder="0"
+	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+<div>
+	<a href="javascript:void(0);" onclick="LinkClick(0);">LAST STARDUST</a><br/>
+  <a href="javascript:void(0);" onclick="LinkClick(1);">点描の唄</a><br />
+</div>
+
 
 <div class="movie_center">
 	<div id="movie-play"></div>
 </div>
 <ul id="movie-menu"></ul>
+
+<script>
+	function LinkClick(param) {
+    var elem = document.getElementById("ytV");
+
+    switch (param) {
+      case 0:
+        elem.src = "https://www.youtube.com/embed/CQnKxeE2IbQ?start=2674&end=2680";
+        break;
+      case 1:
+        elem.src = "https://www.youtube.com/embed/CQnKxeE2IbQ?start=1070&end=1385";
+        break;
+    }
+  }
+	// $(function() {
+    // var index = $('.tab_box .tab_btn').index(this);
+    // $('.btn').on('click',function(){
+      // $('.modalsearch,.masksearch').fadeIn();
+      // $('iframe').removeSrc('https://www.youtube.com/embed/CQnKxeE2IbQ?start=2674&end=2680');
+      // $('iframe').addSrc('https://www.youtube.com/embed/CQnKxeE2IbQ?start=1070&end=1385');
+      // $(".edit").toggle();
+      // $(".modalsearch-contents .tab_form").toggle();
+    // });
+    // $('.modalsearch-close,.masksearch').on('click',function(){
+    //   $('.modalsearch,.masksearch').fadeOut();
+    //   $(".edit").toggle(200);
+    //   $('.tab_box .tab_btn, .tab_box .tab_panel, .tab_box .tab_edit').removeClass('active');
+    //   $('.f_tab').addClass('active');
+    //   $(".modalsearch-contents .tab_form").toggle();
+    // });
+  // });
+</script>
 
 <!--<div class="movie-content-wrap">-->
 <!--	<div id="movie-content"></div>-->
@@ -191,7 +233,9 @@
 		{ id: 'E7ZoxfoRxWw', start: '' }, //youtubeのID },
 		{ id: 'bVQ83PuM8qo', start: '646', end: '827' },
 		{ id: 'LbaxU0-3wB8', start: '611', end: '841' },
-		{ id: 'bVQ83PuM8qo', start: '' }
+		{ id: 'CQnKxeE2IbQ', start: '1069', end: '1385' },
+		{ id: 'CQnKxeE2IbQ', start: '2146', end: '2380' },
+		{ id: 'CQnKxeE2IbQ', start: '2388', end: '2694' }
 	];
 		// let ytTime = [
 		// 	{ start: ''},
