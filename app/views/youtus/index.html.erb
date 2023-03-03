@@ -39,32 +39,24 @@
 	function LinkClick(param) {
     var elem = document.getElementById("ytV");
 
-    switch (param) {
+  //   function play(ytV) {
+		// 	ytPlayer.loadVideoById(ytV);
+		// }
+		switch (param) {
       case 0:
-        elem.src = "https://www.youtube.com/embed/CQnKxeE2IbQ?start=2674&end=2680";
+        elem.src = "https://www.youtube.com/embed/CQnKxeE2IbQ?start=1070&end=1385";
+        // ytPlayer.loadVideoById("ytV")
+        // document.getElementById("ytp-large-play-button ytp-button ytp-large-play-button-red-bg").click();
+        // play(ytId);ytp-large-play-button ytp-button ytp-large-play-button-red-bg
         break;
       case 1:
-        elem.src = "https://www.youtube.com/embed/CQnKxeE2IbQ?start=1070&end=1385";
+        elem.src = "https://www.youtube.com/embed/CQnKxeE2IbQ?start=2388&end=2694";
+        // ytPlayer.loadVideoById("ytV")
+    //     ytV = $('iframe').attr('src').replace('https://www.youtube.com/embed/CQnKxeE2IbQ?start=1070&end=1385');
+				// play(ytV);
         break;
     }
   }
-	// $(function() {
-    // var index = $('.tab_box .tab_btn').index(this);
-    // $('.btn').on('click',function(){
-      // $('.modalsearch,.masksearch').fadeIn();
-      // $('iframe').removeSrc('https://www.youtube.com/embed/CQnKxeE2IbQ?start=2674&end=2680');
-      // $('iframe').addSrc('https://www.youtube.com/embed/CQnKxeE2IbQ?start=1070&end=1385');
-      // $(".edit").toggle();
-      // $(".modalsearch-contents .tab_form").toggle();
-    // });
-    // $('.modalsearch-close,.masksearch').on('click',function(){
-    //   $('.modalsearch,.masksearch').fadeOut();
-    //   $(".edit").toggle(200);
-    //   $('.tab_box .tab_btn, .tab_box .tab_panel, .tab_box .tab_edit').removeClass('active');
-    //   $('.f_tab').addClass('active');
-    //   $(".modalsearch-contents .tab_form").toggle();
-    // });
-  // });
 </script>
 
 <!--<div class="movie-content-wrap">-->
@@ -259,10 +251,10 @@
 				rel: 0, //関連動画なし
 				modestbranding: 1, //YouTube ロゴなし
 					// playerVars: {start: ytTime[0]['start']}
-					playerVars: {
-						start: ytData[0]['start'],
-						start: ytData[0]['end'],
-					}
+				playerVars: {
+					start: ytData[0]['start'],
+					end: ytData[0]['end'],
+				}
 			}
     });
   }
@@ -270,15 +262,33 @@
 	function play(ytId, seekTime) {
 		ytPlayer.loadVideoById(ytId, seekTime);
 	}
+	// function play(ytId) {
+	// 	ytPlayer.loadVideoById(ytId);
+	// }
 
 //サムネイルクリック
+// $(function() {
+// 	$('#movie-menu').append(thumbInsert);
+//   /* 指定した動画を再生 */
+// 	$('#movie-menu li img').on('click', function() {
+// 		ytId = $(this).attr('src').replace('https://img.youtube.com/vi/', '');
+// 		ytId = ytId.replace('/default.jpg', '');
+// 		play(ytId, 0);
+// 		return false;
+// 	});
+// });
 $(function() {
 	$('#movie-menu').append(thumbInsert);
   /* 指定した動画を再生 */
 	$('#movie-menu li img').on('click', function() {
-		ytId = $(this).attr('src').replace('https://img.youtube.com/vi/', '');
-		ytId = ytId.replace('/default.jpg', '');
-		play(ytId, 0);
+		// ytId = $(this).attr('src').replace('https://img.youtube.com/vi/', '');
+		// ytId = ytId.replace('/default.jpg', '');
+		// play(ytId, 0);
+		ytNum = $('#movie-menu li img').index(this)
+		console.log(ytNum);
+		console.log(ytData[ytNum]['id']);
+		play(ytData[ytNum]['id'], ytData[ytNum]['start']);
+		// player.clearVideo()
 		return false;
 	});
 });
