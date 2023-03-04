@@ -1,13 +1,9 @@
 <div class="container">
 	<div class="row">
-		<h1>Youtu#index</h1>
-		<p>Find me in app/views/youtu/index.html.erb</p>
 	</div>
 
 	<div class="row">
-	</div>
-
-	<div class="row">
+<!----- APItest -original- ----->
 		<div class="col-md-7">
 			<iframe id="ytV" width="560" height="315" src="https://www.youtube.com/embed/CQnKxeE2IbQ?start=2388&end=2694"
 				title="YouTube video player" frameborder="0"
@@ -18,6 +14,7 @@
 			  <a href="javascript:void(0);" onclick="LinkClick(1);">点描の唄</a><br />
 			</div>
 
+<!----- APItest -movie_center- ----->
 			<div class="movie_center mt-md-2" style="max-width: 600px">
 				<div id="movie-play"></div>
 			</div>
@@ -28,19 +25,35 @@
 				<ul id="movie-menu" class="list-group" style=""></ul>
 			</div>
 		</div>
+
 		<div class="col-md-3">
+			<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+			  <label class="btn btn-secondary btn-sm active">
+			    <input type="radio" name="options" id="option1" autocomplete="off" checked> 通常
+			  </label>
+			  <label class="btn btn-secondary btn-sm">
+			    <input type="radio" name="options" id="continuous_playback" autocomplete="off"> 連続再生
+			  </label>
+			  <label class="btn btn-secondary btn-sm">
+			    <input type="radio" name="options" id="shuffle_playback" autocomplete="off"> シャッフル
+			  </label>
+			</div>
+			<div class="mb-2">
+				<button class="continuous_playback btn btn-sm btn-outline-danger">連続再生</button>
+				<button class="shuffle_playback btn btn-sm btn-outline-danger">シャッフル再生</button>
+			</div>
 			<div class="overflow-auto" style="height:50vh;">
 				<div id="movie-menu-2" class="list-group" style="">
-					<button class="list-group-item list-group-item-action px-auto">SOS</button>
-					<button class="list-group-item list-group-item-action px-auto">残響讃歌</button>
-					<button class="list-group-item list-group-item-action px-auto">シャルル</button>
-					<button class="list-group-item list-group-item-action px-auto">LAST STARDUST</button>
-					<button class="list-group-item list-group-item-action px-auto">you</button>
-					<button class="list-group-item list-group-item-action px-auto">点描の唄</button>
-					<button class="list-group-item list-group-item-action px-auto">Virtual to LIVE</button>
-					<button class="list-group-item list-group-item-action px-auto">only my railgun</button>
-					<button class="list-group-item list-group-item-action px-auto">神っぽいな</button>
-					<button class="list-group-item list-group-item-action px-auto">神っぽいな</button>
+					<button class="list-group-item list-group-item-action px-auto" id="0">SOS</button>
+					<button class="list-group-item list-group-item-action px-auto" id="1">残響讃歌</button>
+					<button class="list-group-item list-group-item-action px-auto" id="2">シャルル</button>
+					<button class="list-group-item list-group-item-action px-auto" id="3">LAST STARDUST</button>
+					<button class="list-group-item list-group-item-action px-auto" id="4">you</button>
+					<button class="list-group-item list-group-item-action px-auto" id="5">点描の唄</button>
+					<button class="list-group-item list-group-item-action px-auto" id="6">Virtual to LIVE</button>
+					<button class="list-group-item list-group-item-action px-auto" id="7">only my railgun</button>
+					<button class="list-group-item list-group-item-action px-auto" id="8">神っぽいな</button>
+					<button class="list-group-item list-group-item-action px-auto" id="9">神っぽいな</button>
 				</div>
 			</div>
 		</div>
@@ -73,7 +86,7 @@
 
 
 
-
+<!----- APItest -original- ----->
 <script>
 	function LinkClick(param) {
     var elem = document.getElementById("ytV");
@@ -97,6 +110,170 @@
     }
   }
 </script>
+
+
+
+<!----- movie_center ----->
+<script>
+//IFrame Player APIを呼び出す
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+//プレーヤーの準備
+	var ytNum = 0;
+	let thumbInsert = '';
+	let ytPlayer;
+	let ytData = [
+		{ id: 'E7ZoxfoRxWw', start: '' }, //{ youtubeのID, 開始時間(秒), 終了時間(秒) },
+		{ id: 'bVQ83PuM8qo', start: '646', end: '827' },
+		{ id: 'LbaxU0-3wB8', start: '611', end: '841' },
+		{ id: 'CQnKxeE2IbQ', start: '1069', end: '1385' },
+		{ id: 'CQnKxeE2IbQ', start: '2146', end: '2380' },
+		{ id: 'CQnKxeE2IbQ', start: '2388', end: '2694' },
+		{ id: 'B_FSf9q8Teo', start: '', end: '' },
+		{ id: 'eXsrobcgs9E', start: '455', end: '706' },
+		{ id: 'n6cAE2ue84w', start: '915', end: '1119' },
+		{ id: 'Dg6dG3U6n-c', start: '', end: '' },
+	];
+		// let ytTime = [
+		// 	{ start: ''},
+		// 	{ start: '646', end: '827'},
+		// 	{ start: '611', end: '841'},
+		// 	{ start: ''}
+		// 	];
+//サムネイル画像の埋め込み準備
+	for(let i = 0; i < ytData.length; i++) {
+		thumbInsert += '<li class="list-group-item p-1 mx-1">';
+		thumbInsert += '<img src="https://img.youtube.com/vi/' + ytData[i]['id'] + '/default.jpg" alt="" class="img-fluid" style="max-width: 100%; , height: auto;">';
+		thumbInsert += '</li>';
+	}
+// 動画プレーヤーの読み込み
+	window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('movie-play', {
+      width: '640',
+      height: '360',
+      videoId: ytData[0]['id'],
+			playerVars:{
+				rel: 0, //関連動画なし
+				modestbranding: 1, //YouTube ロゴなし
+				disablekb: 0,
+					// playerVars: {start: ytTime[0]['start']}
+				start: ytData[0]['start'],
+				end: ytData[0]['end'],
+				// playerVars: {
+				// 	start: ytData[0]['start'],
+				// 	end: ytData[0]['end'],
+				// },
+			},
+			events: { /* イベント */
+        'onReady': onPlayerReady,   /* プレーヤの準備完了時 */
+        'onStateChange': onPlayerStateChange   /* 動画プレーヤーのステータス変更 */
+      }
+    });
+  }
+	//動画の再生
+	// function play(ytId, seekTime) {
+	// 	ytPlayer.loadVideoById(ytId, seekTime);
+	// }
+	function onPlayerReady(event) {
+    event.target.playVideo();
+  }
+	function play(ytNum) {
+		ytPlayer.loadVideoById({
+				'videoId': ytData[ytNum]['id'],
+        'startSeconds': ytData[ytNum]['start'],
+        'endSeconds': ytData[ytNum]['end'],
+        'suggestedQuality': 'medium',
+				'rel': 0, //関連動画なし
+				'modestbranding': 1, //YouTube ロゴなし
+				// 'enablejsapi': 1,
+				// 'suggestedQuality': 'large',
+				'disablekb': 0 //キーボード操作有効
+		});
+	}
+	// function play(ytId) {
+	// 	ytPlayer.loadVideoById(ytId);
+	// }
+
+//サムネイルクリック
+	$(function() {
+		$('#movie-menu').append(thumbInsert);
+	  /* 指定した動画を再生 */
+		$('#movie-menu li img, #movie-menu-2 button').on('click', function() {
+			// var ytNum = $('#movie-menu li img, #movie-menu-2 button').index(this)
+			var ytNum = $(this).attr('id');
+			if (ytNum >= ytData.length){
+				ytNum = ytNum - ytData.length;
+			}
+			console.log(ytNum);
+			console.log(ytData[ytNum]['id']);
+			play(ytNum);
+			return false;
+		});
+	});
+	// $(function() {
+	// 	$('#movie-menu').append(thumbInsert);
+	//   /* 指定した動画を再生 */
+	// 	$('#movie-menu li img').on('click', function() {
+	// 		ytId = $(this).attr('src').replace('https://img.youtube.com/vi/', '');
+	// 		ytId = ytId.replace('/default.jpg', '');
+	// 		play(ytId, 0);
+	// 		return false;
+	// 	});
+	// });
+
+	// $('#movie-menu-2 button').click(function() {
+	//   // var clickedId = $(this).attr('id');
+	//   var ytNum = $(this).attr('id');
+	//   // var newId = parseInt(clickedId) + 1; // 計算して新しい値を計算する
+	//   // 新しい値を使って処理を実行するコードをここに記述します
+	//   // console.log(newId);
+	// });
+
+	var done = false;
+	function onPlayerStateChange(event) {
+		if ($('#continuous_playback').parent().hasClass('active')) {
+	  // 処理を実行するコードをここに記述します
+			console.log(event);
+			if (event.data == 0) {
+				ytNum = parseInt(ytNum) + 1;
+				console.log(ytNum)
+				play(ytNum);
+			}
+		}
+	  // if (event.data == YT.PlayerState.PLAYING && !done) {
+	  //   setTimeout(stopVideo, 6000);
+	  //   done = true;
+	  // }
+	}
+	// function stopVideo() {
+	//   ytPlayer.stopVideo();
+	// }
+	//連続再生
+	// $(function onPlayerStateChange(event) {
+	// 	// var status = player.getPlayerState();
+	// 	console.log(event)
+	// 	// if (status == )onPlayerContinuousPlayback
+	// });
+	// $(function() {
+	// 	$('.continuous_playback').on('click', function continuous_playback(n) {
+	// 		let n = 0;
+	// 		var status = player.getPlayerState();
+	// 		if (i > ytData.length) {
+	// 			break;
+	// 		}
+	// 		play(n);
+	// 		document.getElementById('status').continuous_playback(i+=);
+	// 		// plus = i +=;
+	// 		// for(let i = 0; i < ytData.length; i++) {
+	// 		// }
+	// 	});
+	// });
+</script>
+
+
 
 <!--<div class="movie-content-wrap">-->
 <!--	<div id="movie-content"></div>-->
@@ -249,106 +426,6 @@
 
 
 
-<!----- movie_center ----->
-<script>
-//IFrame Player APIを呼び出す
-  const tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/player_api";
-  const firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  //プレーヤーの準備
-	let thumbInsert = '';
-	let ytPlayer;
-	let ytData = [
-		{ id: 'E7ZoxfoRxWw', start: '' }, //{ youtubeのID, 開始時間(秒), 終了時間(秒) },
-		{ id: 'bVQ83PuM8qo', start: '646', end: '827' },
-		{ id: 'LbaxU0-3wB8', start: '611', end: '841' },
-		{ id: 'CQnKxeE2IbQ', start: '1069', end: '1385' },
-		{ id: 'CQnKxeE2IbQ', start: '2146', end: '2380' },
-		{ id: 'CQnKxeE2IbQ', start: '2388', end: '2694' },
-		{ id: 'B_FSf9q8Teo', start: '', end: '' },
-		{ id: 'eXsrobcgs9E', start: '455', end: '706' },
-		{ id: 'n6cAE2ue84w', start: '915', end: '1119' },
-		{ id: 'Dg6dG3U6n-c', start: '', end: '' },
-	];
-		// let ytTime = [
-		// 	{ start: ''},
-		// 	{ start: '646', end: '827'},
-		// 	{ start: '611', end: '841'},
-		// 	{ start: ''}
-		// 	];
-	//サムネイル画像の埋め込み準備
-	for(let i = 0; i < ytData.length; i++) {
-		thumbInsert += '<li class="list-group-item p-1 mx-1">';
-		thumbInsert += '<img src="https://img.youtube.com/vi/' + ytData[i]['id'] + '/default.jpg" alt="" class="img-fluid" style="max-width: 100%; , height: auto;">';
-		thumbInsert += '</li>';
-	}
-  // 動画プレーヤーの読み込み
-	window.onYouTubeIframeAPIReady = function() {
-    ytPlayer = new YT.Player('movie-play', {
-      width: '640',
-      height: '360',
-      videoId: ytData[0]['id'],
-			playerVars:{
-				rel: 0, //関連動画なし
-				modestbranding: 1, //YouTube ロゴなし
-				disablekb: 0,
-					// playerVars: {start: ytTime[0]['start']}
-				playerVars: {
-					start: ytData[0]['start'],
-					end: ytData[0]['end'],
-				}
-			}
-    });
-  }
-	//動画の再生
-	// function play(ytId, seekTime) {
-	// 	ytPlayer.loadVideoById(ytId, seekTime);
-	// }
-	function play(ytNum) {
-		ytPlayer.loadVideoById({
-				'videoId': ytData[ytNum]['id'],
-        'startSeconds': ytData[ytNum]['start'],
-        'endSeconds': ytData[ytNum]['end'],
-        'suggestedQuality': 'medium',
-				'rel': 0, //関連動画なし
-				'modestbranding': 1, //YouTube ロゴなし
-				// 'enablejsapi': 1,
-				// 'suggestedQuality': 'large',
-				// 'disablekb': 0 //キーボード操作有効
-		});
-	}
-	// function play(ytId) {
-	// 	ytPlayer.loadVideoById(ytId);
-	// }
-
-//サムネイルクリック
-$(function() {
-	$('#movie-menu').append(thumbInsert);
-  /* 指定した動画を再生 */
-	$('#movie-menu li img, #movie-menu-2 button').on('click', function() {
-		ytNum = $('#movie-menu li img, #movie-menu-2 button').index(this)
-		if (ytNum >= ytData.length){
-			ytNum = ytNum - ytData.length;
-		}
-		console.log(ytNum);
-		console.log(ytData[ytNum]['id']);
-		play(ytNum);
-		return false;
-	});
-});
-// $(function() {
-// 	$('#movie-menu').append(thumbInsert);
-//   /* 指定した動画を再生 */
-// 	$('#movie-menu li img').on('click', function() {
-// 		ytId = $(this).attr('src').replace('https://img.youtube.com/vi/', '');
-// 		ytId = ytId.replace('/default.jpg', '');
-// 		play(ytId, 0);
-// 		return false;
-// 	});
-// });
-</script>
 
 
 
