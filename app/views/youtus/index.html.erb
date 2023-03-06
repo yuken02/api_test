@@ -239,12 +239,14 @@
 			console.log(event);
 			if (event.data == 1) {
 				playlog = 11;
+				console.log(playlog);
 			}
 			// if (event.data == 0) {
 			if (event.data == YT.PlayerState.ENDED) {
 				if (playlog == 11) {
 					playlog = 00;
 					ytNum = parseInt(ytNum) + 1;
+					console.log(playlog);
 					console.log(ytNum);
 					play(ytNum);
 				}
