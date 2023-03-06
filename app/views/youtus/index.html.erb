@@ -243,6 +243,7 @@
 			// if (event.data == 0) {
 			if (event.data == YT.PlayerState.ENDED) {
 				if (playlog == 1) {
+					playlog = 0;
 					ytNum = parseInt(ytNum) + 1;
 					console.log(ytNum);
 					play(ytNum);
