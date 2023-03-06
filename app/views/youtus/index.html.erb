@@ -127,7 +127,7 @@
 	let ytPlayer;
 	let ytData = [
 		{ id: 'E7ZoxfoRxWw', start: '' }, //{ youtubeのID, 開始時間(秒), 終了時間(秒) },
-		{ id: 'bVQ83PuM8qo', start: '646', end: '827' },
+		{ id: 'bVQ83PuM8qo', start: '646', end: '828' },
 		{ id: 'LbaxU0-3wB8', start: '611', end: '841' },
 		{ id: 'CQnKxeE2IbQ', start: '1069', end: '1385' },
 		{ id: 'CQnKxeE2IbQ', start: '2146', end: '2380' },
@@ -202,8 +202,8 @@
 		$('#movie-menu').append(thumbInsert);
 	  /* 指定した動画を再生 */
 		$('#movie-menu li img, #movie-menu-2 button').on('click', function() {
-			// var ytNum = $('#movie-menu li img, #movie-menu-2 button').index(this)
-			var ytNum = $(this).attr('id');
+			ytNum = $('#movie-menu li img, #movie-menu-2 button').index(this)
+			// ytNum = $(this).attr('id');
 			if (ytNum >= ytData.length){
 				ytNum = ytNum - ytData.length;
 			}
@@ -237,10 +237,13 @@
 		if ($('#continuous_playback').parent().hasClass('active')) {
 	  // 処理を実行するコードをここに記述します
 			console.log(event);
-			if (event.data == 0) {
-				ytNum = parseInt(ytNum) + 1;
-				console.log(ytNum)
-				play(ytNum);
+			if (event.data == YT.PlayerState.PLAYING) {
+				// if (event.data == 0) {
+				if (event.data == YT.PlayerState.ENDED) {
+					ytNum = parseInt(ytNum) + 1;
+					console.log(ytNum)
+					play(ytNum);
+				}
 			}
 		}
 	  // if (event.data == YT.PlayerState.PLAYING && !done) {
