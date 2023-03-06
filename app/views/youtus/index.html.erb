@@ -241,7 +241,7 @@
 			// 	playlog = 1;
 			// }
 			// if (event.data == 0) {
-			if (event.data == YT.PlayerState.ENDED) {
+			if (event.data == YT.PlayerState.ENDED && !done) {
 				// if (playlog == 1) {
 					ytNum = parseInt(ytNum) + 1;
 					console.log(ytNum);
